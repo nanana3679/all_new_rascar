@@ -19,7 +19,7 @@ from SEN040134 import SEN040134_Tracking as Tracking_Sensor
 # =======================================================================
 # import ALL method in the TCS34725 RGB Module
 # =======================================================================
-from TCS34725 import TCS34725_RGB as RGB_Sensor
+#from TCS34725 import TCS34725_RGB as RGB_Sensor
 
 # =======================================================================
 # import ALL method in the SR02 Ultrasonic Module
@@ -46,14 +46,17 @@ GPIO.setwarnings(False)
 class Car(object):
 
     """ Initialize Speed Value """
-    SLOWEST = 20
-    SLOWER = 25
-    SLOW = 35
-    NORMAL = 40
-    FAST = 65
-    FASTER = 80
-    FASTEST = 100
-
+    
+    a=0
+    SLOWEST = 20+a
+    SLOWER = 25+a
+    SLOW = 35+a
+    NORMAL = 40+a
+    FAST = 65+a
+    FASTER = 80+a
+    FASTEST = 100+a
+    
+    
     def __init__(self, carName):
         try:
             # ================================================================
@@ -64,19 +67,20 @@ class Car(object):
             # ================================================================
             # TRACKING MODULE DRIVER INITIALIZE
             # ================================================================
-            self.line_detector = Tracking_Sensor.SEN040134_Tracking([16, 18, 22, 40, 32])
-
+            self.line_detector = Tracking_Sensor.SEN040134_Tracking([16, 18, 31, 38, 32])
+            # OTA 22 -> 29 -> 31
+            # OTC 40 -> 38
             # ================================================================
             # RGB MODULE DRIVER INITIALIZE
             # ================================================================
-            self.color_getter = RGB_Sensor.TCS34725()
-            if self.color_getter.get_exception_occur():
-                print("[ERRNO-101] There is a problem with RGB_Sensor(TCS34725)")
+            #self.color_getter = RGB_Sensor.TCS34725()
+            #if self.color_getter.get_exception_occur():
+            #    print("[ERRNO-101] There is a problem with RGB_Sensor(TCS34725)")
 
             # ================================================================
             # DISABLE RGB MODULE INTERRUPTION
             # ================================================================
-            self.color_getter.set_interrupt(False)
+            #self.color_getter.set_interrupt(False)
 
             # ================================================================
             # PCA9685(PWM 16-ch Extension Board) MODULE WAKEUP
@@ -113,7 +117,7 @@ class Car(object):
 
         except Exception as e:
             print("CONTACT TO Kookmin Univ. Teaching Assistant")
-            print("Learn more : " + e)
+            print("Learn more : " + str(e))
 
     def drive_parking(self):
         # front wheels center alignment

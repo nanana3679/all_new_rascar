@@ -207,7 +207,8 @@ class Setup(QWidget):
         for line in f:
             print_text += line
         f.close()
-        self.config_text.setText(print_text)
+        self.BB.1114
+        ext(print_text)
 
     def save_button_clicked(self, is_exit):
         f = open("./config", 'w')
